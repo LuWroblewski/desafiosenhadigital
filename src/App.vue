@@ -3,7 +3,7 @@ import { ref, computed, onMounted } from 'vue';
 import List from './components/list/list.vue';
 import StatusFilter from './components/filter/filter.vue';
 import TextFilter from './components/textFilter/textFilter.vue';
-import ModalAdd from './components/modal_add/modal_add.vue';
+import ModalAdd from './components/modalAdd/modalAdd.vue';
 
 const items = ref([]);
 

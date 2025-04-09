@@ -13,7 +13,7 @@
           <span>Descrição</span>
           <input v-model="description" type="text" placeholder="Descrição" required class="input w-full" />
         </label>
-        <label class="input w-full">
+        <label class="w-full">
           <span class="label">Data de Vencimento</span>
           <input v-model="data" type="date" required class="input w-full" />
         </label>
