@@ -1,7 +1,7 @@
 <template>
-  <button class="btn btn-soft" @click="openModal"><ListPlus /> Adicionar item</button>
+  <button class="btn btn-soft" onclick="addmodal.showModal()"><ListPlus /> Adicionar item</button>
 
-  <dialog ref="modal" class="modal">
+  <dialog id="addmodal" class="modal modal-bottom sm:modal-middle">
     <div class="modal-box">
       <h3 class="text-lg font-bold">Adicionar item a lista</h3>
       <div class="w-full space-y-2.5 mt-4">
@@ -41,10 +41,6 @@ const description = ref('');
 const data = ref('');
 const modal = ref(null);
 
-function openModal() {
-  modal.value?.showModal();
-}
-
 function addItem() {
   if (!title.value || !description.value || !data.value) {
     alert('Preencha todos os campos!');
@@ -65,6 +61,6 @@ function addItem() {
   description.value = '';
   data.value = '';
 
-  modal.value?.close();
+  addmodal.close();
 }
 </script>
