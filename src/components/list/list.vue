@@ -4,18 +4,15 @@
       <table class="table w-full">
         <thead>
           <tr>
-            <th>#</th>
             <th>Título</th>
             <th>Descrição</th>
             <th>Vencimento</th>
-            <th>Status</th>
+            <th class="hidden md:table-cell">Status</th>
             <th>Ação</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(item, index) in props.items" :key="index">
-            <th>{{ index + 1 }}</th>
-
             <td v-if="editingIndex === index">
               <input v-model="editedItem.title" class="input input-bordered input-sm w-full" />
             </td>
@@ -26,22 +23,38 @@
             </td>
             <td v-else>{{ item.description }}</td>
 
-            <td v-if="editingIndex === index">
-              <input v-model="editedItem.data" class="input input-bordered input-sm w-full" type="date" />
+            <td class="block md:hidden">
+              <div class="text-sm">
+                <div>{{ item.data }}</div>
+                <div class="mt-8 font-semibold text-neutral-400">Status</div>
+                <div :class="item.status === 'pendente' ? 'text-warning font-semibold' : 'text-success font-semibold'">
+                  {{ item.status }}
+                </div>
+              </div>
             </td>
-            <td v-else>{{ item.data }}</td>
 
-            <td :class="item.status === 'pendente' ? 'text-warning font-semibold' : 'text-success font-semibold'">
+            <td class="hidden md:table-cell">
+              {{ item.data }}
+            </td>
+            <td
+              class="hidden md:table-cell"
+              :class="item.status === 'pendente' ? 'text-warning font-semibold' : 'text-success font-semibold'"
+            >
               {{ item.status }}
             </td>
 
             <td class="space-x-2">
               <template v-if="editingIndex === index">
-                <button class="btn btn-success" @click="saveEdit(index)">Salvar</button>
-                <button class="btn btn-error btn-soft" @click="cancelEdit"><X /></button>
+                <div class="space-y-2">
+                  <button class="btn btn-success btn-soft" @click="saveEdit(index)">
+                    <Check class="md:hidden" />
+                    <span class="hidden md:inline">Salvar</span>
+                  </button>
+                  <button class="btn btn-error btn-soft" @click="cancelEdit"><X /></button>
+                </div>
               </template>
               <template v-else>
-                <div class="flex items-center gap-2">
+                <div class="flex flex-col space-y-2 md:flex-row md:space-y-0 items-center gap-2">
                   <button
                     v-if="item.status === 'pendente'"
                     @click="$emit('finish-item', item)"
