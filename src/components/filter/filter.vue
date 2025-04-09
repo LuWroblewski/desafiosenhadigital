@@ -13,7 +13,6 @@
 import { ref } from 'vue';
 
 const selectedStatus = ref('');
-
 const emit = defineEmits(['status-change']);
 
 function emitFilter() {

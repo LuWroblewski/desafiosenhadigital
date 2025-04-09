@@ -7,7 +7,7 @@
             <th>#</th>
             <th>Título</th>
             <th>Descrição</th>
-            <th>Data de Vencimento</th>
+            <th>Vencimento</th>
             <th>Status</th>
             <th>Ação</th>
           </tr>
@@ -41,11 +41,26 @@
                 <button class="btn btn-error btn-soft" @click="cancelEdit"><X /></button>
               </template>
               <template v-else>
-                <button v-if="item.status === 'pendente'" @click="$emit('finish-item', item)" class="btn btn-success btn-soft">
-                  Concluir
-                </button>
-                <button @click="editItem(index)" class="btn btn-info btn-soft">Editar</button>
-                <button @click="$emit('delete-item', item)" class="btn btn-error btn-soft"><X /></button>
+                <div class="flex items-center gap-2">
+                  <button
+                    v-if="item.status === 'pendente'"
+                    @click="$emit('finish-item', item)"
+                    class="btn btn-success btn-soft flex items-center gap-2"
+                  >
+                    <Check class="w-4 h-4 md:hidden" />
+                    <span class="hidden md:inline">Concluir</span>
+                  </button>
+
+                  <button @click="editItem(index)" class="btn btn-info btn-soft flex items-center gap-2">
+                    <Pencil class="w-4 h-4 md:hidden" />
+                    <span class="hidden md:inline">Editar</span>
+                  </button>
+
+                  <button @click="$emit('delete-item', item)" class="btn btn-error btn-soft flex items-center gap-2">
+                    <X class="w-4 h-4 md:hidden" />
+                    <span class="hidden md:inline">Excluir</span>
+                  </button>
+                </div>
               </template>
             </td>
           </tr>
@@ -61,7 +76,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { X } from 'lucide-vue-next';
+import { X, Check, Pencil } from 'lucide-vue-next';
 
 const props = defineProps({
   items: {
